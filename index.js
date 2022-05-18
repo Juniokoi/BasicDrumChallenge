@@ -1,13 +1,4 @@
 const setLayout = document.querySelector( '.set' ).children.length;
-
-const button = document.querySelector( );
-
-document.addEventListener( 'keydown', ( event ) => {
-  let key = event.key;
-  CheckKey( key );
-} );
-
-
 const keyLayout = [
   [ "w", "tom-1" ],
   [ "a", "tom-2" ],
@@ -17,6 +8,33 @@ const keyLayout = [
   [ "k", "kick-bass" ],
   [ "l", "snare" ],
 ];
+
+//código não muito bonito abaixo.
+const btnW = document.querySelector( '.w' );
+const btnA = document.querySelector( '.a' );
+const btnS = document.querySelector( '.s' );
+const btnD = document.querySelector( '.d' );
+const btnJ = document.querySelector( '.j' );
+const btnK = document.querySelector( '.k' );
+const btnL = document.querySelector( '.l' );
+
+btnW.addEventListener( 'click', () => PlaySound( keyLayout[ 0 ][ 1 ] ) );
+btnA.addEventListener( 'click', () => PlaySound( keyLayout[ 1 ][ 1 ] ) );
+btnS.addEventListener( 'click', () => PlaySound( keyLayout[ 2 ][ 1 ] ) );
+btnD.addEventListener( 'click', () => PlaySound( keyLayout[ 3 ][ 1 ] ) );
+btnJ.addEventListener( 'click', () => PlaySound( keyLayout[ 4 ][ 1 ] ) );
+btnK.addEventListener( 'click', () => PlaySound( keyLayout[ 5 ][ 1 ] ) );
+btnL.addEventListener( 'click', () => PlaySound( keyLayout[ 6 ][ 1 ] ) );
+
+// Fim do código feio
+
+document.addEventListener( 'keydown', ( event ) => {
+  let key = event.key;
+  CheckKey( key );
+} );
+
+
+
 
 
 
