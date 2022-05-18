@@ -15,6 +15,7 @@ for ( let i = 0; i < numberOfDrums; i++ ) {
     let buttonInnerText = drumButton[ i ].innerHTML;
     if ( drumLayout[ i ][ 0 ] == buttonInnerText ) {
       PlaySound( drumLayout[ i ][ 1 ] );
+      buttonAnimate( drumLayout[ i ][ 0 ] );
     }
   } );
 
@@ -65,6 +66,7 @@ function CheckKey ( keyName ) {
   for ( let i = 0; i < numberOfDrums; i++ ) {
     if ( drumLayout[ i ][ 0 ] == keyName ) {
       PlaySound( drumLayout[ i ][ 1 ] );
+      buttonAnimate( drumLayout[ i ][ 0 ] );
     }
   }
 };
@@ -77,4 +79,12 @@ function PlaySound ( soundName ) {
   audio.autoplay = false; // Executar sons em websites sem erro.
   audio.play();
   audio.volume = 0.5;
+}
+
+function buttonAnimate ( activeKey ) {
+  let buttonPath = document.querySelector( `.${activeKey}` );
+  buttonPath.classList.add( 'pressed' );
+  setTimeout( () => { buttonPath.classList.remove( 'pressed' ); }, 100 );
+  ;
+  console.log( activeKey );
 }
