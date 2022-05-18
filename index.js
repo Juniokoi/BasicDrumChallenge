@@ -1,5 +1,5 @@
-const setLayout = document.querySelector( '.set' ).children.length;
-const keyLayout = [
+const numberOfDrums = document.querySelectorAll( '.drum' ).length;
+const drumLayout = [
   [ "w", "tom-1" ],
   [ "a", "tom-2" ],
   [ "s", "tom-3" ],
@@ -8,26 +8,49 @@ const keyLayout = [
   [ "k", "kick-bass" ],
   [ "l", "snare" ],
 ];
+const drumButton = document.querySelectorAll( '.drum' );
 
-//código não muito bonito abaixo.
-const btnW = document.querySelector( '.w' );
-const btnA = document.querySelector( '.a' );
-const btnS = document.querySelector( '.s' );
-const btnD = document.querySelector( '.d' );
-const btnJ = document.querySelector( '.j' );
-const btnK = document.querySelector( '.k' );
-const btnL = document.querySelector( '.l' );
+for ( let i = 0; i < numberOfDrums; i++ ) {
+  drumButton[ i ].addEventListener( "click", function () {
+    let buttonInnerText = drumButton[ i ].innerHTML;
+    if ( drumLayout[ i ][ 0 ] == buttonInnerText ) {
+      PlaySound( drumLayout[ i ][ 1 ] );
+    }
+  }
+  );
 
-btnW.addEventListener( 'click', () => PlaySound( keyLayout[ 0 ][ 1 ] ) );
-btnA.addEventListener( 'click', () => PlaySound( keyLayout[ 1 ][ 1 ] ) );
-btnS.addEventListener( 'click', () => PlaySound( keyLayout[ 2 ][ 1 ] ) );
-btnD.addEventListener( 'click', () => PlaySound( keyLayout[ 3 ][ 1 ] ) );
-btnJ.addEventListener( 'click', () => PlaySound( keyLayout[ 4 ][ 1 ] ) );
-btnK.addEventListener( 'click', () => PlaySound( keyLayout[ 5 ][ 1 ] ) );
-btnL.addEventListener( 'click', () => PlaySound( keyLayout[ 6 ][ 1 ] ) );
+}
 
-// Fim do código feio
 
+
+// //código não muito bonito abaixo.
+// const btnW = document.querySelector( '.w' );
+// const btnA = document.querySelector( '.a' );
+// const btnS = document.querySelector( '.s' );
+// const btnD = document.querySelector( '.d' );
+// const btnJ = document.querySelector( '.j' );
+// const btnK = document.querySelector( '.k' );
+// const btnL = document.querySelector( '.l' );
+
+// btnW.addEventListener( 'click', () => PlaySound( drumLayout[ 0 ][ 1 ] ) );
+// btnA.addEventListener( 'click', () => PlaySound( drumLayout[ 1 ][ 1 ] ) );
+// btnS.addEventListener( 'click', () => PlaySound( drumLayout[ 2 ][ 1 ] ) );
+// btnD.addEventListener( 'click', () => PlaySound( drumLayout[ 3 ][ 1 ] ) );
+// btnJ.addEventListener( 'click', () => PlaySound( drumLayout[ 4 ][ 1 ] ) );
+// btnK.addEventListener( 'click', () => PlaySound( drumLayout[ 5 ][ 1 ] ) );
+// btnL.addEventListener( 'click', () => PlaySound( drumLayout[ 6 ][ 1 ] ) );
+
+// Fim do código feio - 
+
+
+
+// Foi descoberto que da pra gerar um For Loop de 
+// cada botão  com classe .drum, mesmo tendo vários, 
+// logo não foi necessário mais usar estas linhas feias acima.
+
+
+
+//Fica atento a quais teclas foram pressionadas, e já executa uma função
 document.addEventListener( 'keydown', ( event ) => {
   let key = event.key;
   CheckKey( key );
@@ -37,19 +60,22 @@ document.addEventListener( 'keydown', ( event ) => {
 
 
 
-
+//Verifica se a tecla pressionada bate com alguma das listas criadas,
+// se sim, executa uma função que faz tocar o som
 function CheckKey ( keyName ) {
-  for ( let i = 0; i < setLayout; i++ ) {
-    if ( keyLayout[ i ][ 0 ] == keyName ) {
-      PlaySound( keyLayout[ i ][ 1 ] );
+  for ( let i = 0; i < numberOfDrums; i++ ) {
+    if ( drumLayout[ i ][ 0 ] == keyName ) {
+      PlaySound( drumLayout[ i ][ 1 ] );
     }
   }
 };
 
+
+//Puxa o áudio da pasta /sounds/ e executa. 
 function PlaySound ( soundName ) {
   const audio = new Audio( `/sounds/${soundName}.mp3` );
-  audio.muted = false;
-  audio.autoplay = false;
+  audio.muted = false; // Duas propriedades necessárias para conseguir
+  audio.autoplay = false; // Executar sons em websites sem erro.
   audio.play();
   audio.volume = 0.5;
 }
