@@ -1,6 +1,6 @@
 const setLayout = document.querySelector( '.set' ).children.length;
 
-const button = document.querySelector( '.a' );
+const button = document.querySelector( );
 
 document.addEventListener( 'keydown', ( event ) => {
   let key = event.key;
