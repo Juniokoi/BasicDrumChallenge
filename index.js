@@ -11,13 +11,12 @@ const drumLayout = [
 const drumButton = document.querySelectorAll( '.drum' );
 
 for ( let i = 0; i < numberOfDrums; i++ ) {
-  drumButton[ i ].addEventListener( "click", function () {
+  drumButton[ i ].addEventListener( "click", () => {
     let buttonInnerText = drumButton[ i ].innerHTML;
     if ( drumLayout[ i ][ 0 ] == buttonInnerText ) {
       PlaySound( drumLayout[ i ][ 1 ] );
     }
-  }
-  );
+  } );
 
 }
 
